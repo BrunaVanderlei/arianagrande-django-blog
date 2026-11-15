@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ariana Grande{% endblock %} | Discografia & Blog</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <header>
+        <a href="{% url 'home' %}" class="logo">
+            <img src="{% static 'images/logo_ariana.png' %}" alt="Ariana Grande Logo" style="height: 70px; width: auto; display: block;">
+        </a>
+
+        <h1>Ariana Grande</h1>
+
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Início</a></li>
+                <li><a href="{% url 'about' %}">Sobre</a></li>
+                <li><a href="{% url 'post_list' %}">Discografia & Posts</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer style="text-align: center; padding: 1rem;">
+        <p style="text-align: center;">Copyright 2026 Bruna Bonifácio Silva Vanderlei.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,26 @@
+from django.db import models
+
+
+class Post(models.Model):
+    title = models.CharField('Título', max_length=200)
+    content = models.TextField('Conteúdo')
+    image = models.CharField(
+        'Caminho ou URL da imagem',
+        max_length=300,
+        blank=True,
+        help_text='Ex: /static/images/sweetener.webp ou link https://...'
+    )
+    color = models.CharField(
+        'Cor de fundo (Hex)',
+        max_length=7,
+        blank=True,
+        default='#ECDBE0',
+        help_text='Ex: #EDDAC9, #AA96A4, #E2B1B6, #847C88, #708076, #9FB0A9, #B81016'
+    )
+    created_at = models.DateTimeField('Data de publicação', auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title

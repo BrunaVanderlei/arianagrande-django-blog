@@ -1,0 +1,115 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: #723F4C; 
+  color: white;
+}
+
+header nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+}
+
+footer {
+  color:#890f48
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ECDBE0; 
+  color: black;
+}
+
+main {
+  width: 80%;
+  margin: 50px auto;
+  flex: 1;
+  text-align: justify;
+}
+
+
+
+.grid-albuns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+
+
+.card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.card a {
+  color: #890f48;
+  text-decoration: underline;
+}
+
+p {
+  text-align: justify;
+}
+
+@media (max-width: 768px) {
+  .grid-albuns {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  main {
+    width: 95%;
+  }
+}
+
+header nav a {
+  font-size: 20px; 
+}
+header h1 {
+  font-size: 40px; 
+}
+
+main img {
+  display: block;
+  margin: 0 auto 20px auto;
+  
+  width: 700px;      /* Força todas as imagens a terem este tamanho padrão (pode mudar o valor) */
+  max-width: 100%;   /* Regra de segurança: se a tela for menor que 400px, a imagem encolhe */
+  height: auto;      /* Garante que a imagem não fique esticada ou achatada ao encolher */
+  
+  border-radius: 8px;
+}
+
+p {
+  font-size: 18px; /* Ajuste o número para o tamanho que achar melhor */
+}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Discografia & Posts{% endblock %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2>Discografia & Posts</h2>
+        <a href="{% url 'post_create' %}" style="background-color: #723F4C; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none;">+ Novo Post</a>
+    </div>
+
+    <div class="grid-albuns">
+        {% for post in posts %}
+            <div class="card">
+                {% if post.image %}
+                    <a href="{% url 'post_detail' post.pk %}">
+                        <img src="{{ post.image }}" alt="Capa de {{ post.title }}" style="width: 100%; border-radius: 4px; margin-bottom: 10px;">
+                    </a>
+                {% endif %}
+                <h3><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h3>
+                <small style="color: #555;">Publicado em {{ post.created_at|date:"d/m/Y H:i" }}</small>
+            </div>
+        {% empty %}
+            <p>Nenhum post cadastrado ainda. Clique em <strong>+ Novo Post</strong> para adicionar o primeiro álbum ou artigo.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

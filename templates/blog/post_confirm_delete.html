@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir Post{% endblock %}
+
+{% block content %}
+    <div style="background: white; padding: 25px; border-radius: 8px; text-align: center;">
+        <h2>Excluir "{{ object.title }}"?</h2>
+        <p style="text-align: center;">Tem certeza de que deseja remover este post permanentemente?</p>
+
+        <form method="post" style="margin-top: 20px; display: flex; gap: 15px; justify-content: center;">
+            {% csrf_token %}
+            <button type="submit" style="background-color: #890f48; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 16px;">Confirmar exclusão</button>
+            <a href="{% url 'post_detail' object.pk %}" style="padding: 10px 18px; color: #723F4C;">Cancelar</a>
+        </form>
+    </div>
+{% endblock %}

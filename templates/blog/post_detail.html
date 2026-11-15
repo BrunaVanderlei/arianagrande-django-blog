@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div style="background-color: {% if post.color %}{{ post.color }}{% else %}transparent{% endif %}; padding: 2rem; min-height: 70vh; border-radius: 8px;">
+    <h2 style="text-align: center;">{{ post.title }}</h2>
+    <p style="text-align: center; font-size: 14px; opacity: 0.8;">Publicado em {{ post.created_at|date:"d/m/Y \à\s H:i" }}</p>
+
+    {% if post.image %}
+        <img src="{{ post.image }}" alt="Capa de {{ post.title }}" style="max-width: 300px; display: block; margin: 0 auto 20px auto;">
+    {% endif %}
+
+    <div>
+        {{ post.content|linebreaks }}
+    </div>
+
+    <div style="margin-top: 2rem; display: flex; gap: 15px; justify-content: center;">
+        <a href="{% url 'post_update' post.pk %}" style="background-color: #723F4C; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none;">Editar</a>
+        <a href="{% url 'post_delete' post.pk %}" style="background-color: #890f48; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none;">Excluir</a>
+        <a href="{% url 'post_list' %}" style="padding: 8px 16px; color: #723F4C;">Voltar</a>
+    </div>
+</div>
+{% endblock %}
