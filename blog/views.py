@@ -8,7 +8,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from .models import Post, Comment
+from .models import Post, Comment, Category
 
 
 class HomeView(TemplateView):
@@ -32,14 +32,14 @@ class PostDetailView(DetailView):
 
 class PostCreateView(CreateView):
     model = Post
-    fields = ['title', 'content', 'image', 'color']
+    fields = ['title', 'content', 'image', 'color', 'categories']
     template_name = 'blog/post_form.html'
     success_url = reverse_lazy('post_list')
 
 
 class PostUpdateView(UpdateView):
     model = Post
-    fields = ['title', 'content', 'image', 'color']
+    fields = ['title', 'content', 'image', 'color', 'categories']
     template_name = 'blog/post_form.html'
     success_url = reverse_lazy('post_list')
 
@@ -66,3 +66,25 @@ class CommentCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('post_detail', kwargs={'pk': self.kwargs['pk']})
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'blog/category_list.html'
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'blog/post_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        posts = self.object.posts.all()
+        context['category'] = self.object
+        context['posts'] = posts
+        context['post_list'] = posts
+        context['object_list'] = posts
+        return context
+
+
+    

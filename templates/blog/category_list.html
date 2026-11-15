@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Categorias - Ariana Grande{% endblock %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 2rem auto;">
+    <h2>Categorias das Publicações</h2>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+        {% for category in object_list %}
+            <article style="background-color: #ffffff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                <h3 style="margin-top: 0;">
+                    <a href="{% url 'category_detail' category.pk %}" style="color: #723F4C; text-decoration: none;">
+                        {{ category.name }}
+                    </a>
+                </h3>
+                {% if category.description %}
+                    <p style="line-height: 1.5; opacity: 0.85;">{{ category.description }}</p>
+                {% endif %}
+                <p style="margin-bottom: 0; font-size: 14px;">
+                    <a href="{% url 'category_detail' category.pk %}" style="color: #723F4C; text-decoration: underline;">
+                        Ver posts ({{ category.posts.count }})
+                    </a>
+                </p>
+            </article>
+        {% empty %}
+            <p>Nenhuma categoria cadastrada ainda.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

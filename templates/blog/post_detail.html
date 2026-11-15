@@ -7,6 +7,16 @@
     <h2 style="text-align: center;">{{ post.title }}</h2>
     <p style="text-align: center; font-size: 14px; opacity: 0.8;">Publicado em {{ post.created_at|date:"d/m/Y \à\s H:i" }}</p>
 
+    {% if post.categories.all %}
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 0.8rem 0 1.2rem 0;">
+            {% for category in post.categories.all %}
+                <a href="{% url 'category_detail' category.pk %}" style="background-color: rgba(255, 255, 255, 0.75); color: #723F4C; padding: 4px 12px; border-radius: 999px; font-size: 13px; text-decoration: none; font-weight: bold;">
+                    #{{ category.name }}
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% if post.image %}
         <img src="{{ post.image }}" alt="Capa de {{ post.title }}" style="max-width: 300px; display: block; margin: 0 auto 20px auto;">
     {% endif %}

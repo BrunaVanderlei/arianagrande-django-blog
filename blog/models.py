@@ -1,6 +1,18 @@
 from django.db import models
 from django.conf import settings
 
+class Category(models.Model):
+    name = models.CharField('Nome', max_length=100)
+    description = models.TextField('Descrição', blank=True)
+
+    class Meta:
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
 class Post(models.Model):
     title = models.CharField('Título', max_length=200)
     content = models.TextField('Conteúdo')
@@ -16,6 +28,12 @@ class Post(models.Model):
         blank=True,
         default='#ECDBE0',
         help_text='Ex: #EDDAC9, #AA96A4, #E2B1B6, #847C88, #708076, #9FB0A9, #B81016'
+    )
+    categories = models.ManyToManyField(
+        Category,
+        related_name='posts',
+        blank=True,
+        verbose_name='Categorias',
     )
     created_at = models.DateTimeField('Data de publicação', auto_now_add=True)
 
