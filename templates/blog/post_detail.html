@@ -20,5 +20,25 @@
         <a href="{% url 'post_delete' post.pk %}" style="background-color: #890f48; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none;">Excluir</a>
         <a href="{% url 'post_list' %}" style="padding: 8px 16px; color: #723F4C;">Voltar</a>
     </div>
+    <hr style="margin: 2.5rem 0 1.5rem 0; border: 0; border-top: 1px solid rgba(0, 0, 0, 0.15);">
+
+    <section class="comments-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+            <h3 style="margin: 0;">Comentários ({{ post.comments.count }})</h3>
+            <a href="{% url 'comment_create' post.pk %}" style="padding: 8px 16px; background-color: #6B3E4B; color: #fff; text-decoration: none; border-radius: 6px; font-size: 14px;">+ Adicionar comentário</a>
+        </div>
+
+        {% for comment in post.comments.all %}
+            <div style="background-color: rgba(255, 255, 255, 0.55); padding: 1rem 1.2rem; border-radius: 8px; margin-bottom: 1rem;">
+                <p style="margin: 0 0 0.4rem 0; font-size: 14px;">
+                    <strong>{{ comment.author }}</strong>
+                    <span style="opacity: 0.75;"> — {{ comment.created_at|date:"d/m/Y H:i" }}</span>
+                </p>
+                <p style="margin: 0; line-height: 1.5;">{{ comment.text|linebreaksbr }}</p>
+            </div>
+        {% empty %}
+            <p style="text-align: center; opacity: 0.8;">Ainda não há comentários neste post. Seja o primeiro a comentar!</p>
+        {% endfor %}
+    </section>
 </div>
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Comentar em {{ post.title }} - Ariana Grande{% endblock %}
+
+{% block content %}
+<section class="post-detail" style="background-color: {{ post.color|default:'#ECDBE0' }}; padding: 2rem; border-radius: 12px; max-width: 700px; margin: 2rem auto;">
+    <h2>Novo comentário em "{{ post.title }}"</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Publicar Comentário</button>
+        <a href="{% url 'post_detail' post.pk %}" class="btn">Cancelar</a>
+    </form>
+</section>
+{% endblock %}
